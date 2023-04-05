@@ -1,10 +1,17 @@
 <h1>トレーニング種目新規作成</h1>
-<%= form_with(model: @train, local: true) do |form| %>
+<%= form_with(model: @train, url: user_trains_path(@user), local: true) do |form| %>
   <%= form.label :part, "トレーニングの部位" %>
-  <%= form.select :exercise, options_for_select(["胸", "肩", "上腕二頭筋", "上腕三頭筋", "腹筋", "背中", "脚"]) %>
+  <%= form.select :part, options_for_select(["胸", "肩", "上腕二頭筋", "上腕三頭筋", "腹筋", "背中", "脚"]) %>
 
   <%= form.label :name, "種目の名前" %>
   <%= form.text_field :name %>
 
+  <%= form.label :weight, "重量 " %>
+  <%= form.number_field :weight %>kg
+
+  <%= form.label :rep, "レップ数" %>
+  <%= form.number_field :rep %>回
+
   <%= form.submit "作成" %>
 <% end %>
+

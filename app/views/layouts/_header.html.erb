@@ -13,8 +13,9 @@
               <li><%= link_to "Show", current_user %></li>
               <li><%= link_to "Settings", edit_user_path(current_user) %></li>
               <li class="divider"></li>
-              <li>
-                <%= link_to "Log out", logout_path, method: :delete %>
+              
+              <li><%= link_to "種目追加", new_user_train_path(current_user) %></li>
+              <li><%= link_to "Log out", logout_path, method: :delete %></li>
               </li>
             </ul> 
           </li>
