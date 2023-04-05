@@ -1,14 +1,25 @@
-<h1>トレーニング記録一覧</h1>
-
 <% @trains.group_by { |train| train.created_at.strftime("%Y年%m月%d日") }.each do |date, trains| %>
+
   <h2><%= date %>のトレーニング</h2>
-  <ul>
-    <% trains.each do |train| %>
-      <li><%= train.name %></li>
-    <% end %>
-  </ul>
+  <% trains.each do |train| %>
+    <%= train.name %>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th scope="col">セット数</th>
+          <th scope="col">重量(kg)</th>
+          <th scope="col">レップ</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">1</th>
+          <td><%= train.weight %></td>
+          <td><%= train.rep %></td>
+        </tr>
+      </tbody>
+    </table>
+  <% end %>
 <% end %>
 
-<%= link_to "作成画面へ戻る", new_user_train_path(current_user) %>
-
-
+<%= link_to '作成ページへ戻る', new_user_train_path(@user) %>

@@ -18,12 +18,13 @@ class TrainsController < ApplicationController
   end
 
   def index
-    @trains = Train.all
+    @user = User.find(params[:user_id])
+    @trains = @user.trains.all
   end
 
   private
 
   def train_params
-    params.require(:train).permit(:part, :exercise, :name, :weight, :rep)
+    params.require(:train).permit(:part, :exercise, :name, :weight, :rep).merge(user_id: params[:user_id])
   end
 end
