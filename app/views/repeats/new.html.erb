@@ -1,0 +1,15 @@
+<%= form_for([@train, @train.repeats.build]) do |f| %>
+  <div class="form-group">
+    <%= f.label :weight, "重量(kg)" %>
+    <%= f.number_field :weight, class: "form-control", placeholder: "重量(kg)" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :rep, "レップ" %>
+    <%= f.number_field :rep, class: "form-control", placeholder: "レップ" %>
+  </div>
+  <div class="form-group">
+    <%= f.label :remark, "備考" %>
+    <%= f.text_field :remark, class: "form-control", placeholder: "備考" %>
+  </div>
+  <%= f.submit "保存", class: "btn btn-primary" %>
+<% end %>
