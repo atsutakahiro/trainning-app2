@@ -1,8 +1,7 @@
-<% @trains.group_by { |train| train.created_at.strftime("%Y年%m月%d日") }.each do |date, trains| %>
-
-  <h2><%= date %>のトレーニング</h2>
-  <% trains.each do |train| %>
-    <%= train.name %>
+<% @trains.group_by(&:exercise).each do |exercise, trains| %>
+  <h2><%= exercise %></h2>
+  <% trains.group_by { |train| train.created_at.strftime("%Y年%m月%d日") }.each do |date, grouped_trains| %>
+    <h3><%= date %></h3>
     <table class="table table-bordered">
       <thead>
         <tr>        
@@ -12,14 +11,16 @@
         </tr>
       </thead>  
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td><%= train.weight %></td>
-          <td><%= train.rep %></td>
-        </tr>
+        <% grouped_trains.each_with_index do |train, i| %>
+          <tr>
+            <th scope="row"><%= i + 1 %></th>
+            <td><%= train.weight %></td>
+            <td><%= train.rep %></td>
+          </tr>
+        <% end %>
       </tbody>
     </table>
   <% end %>
 <% end %>
 
-<%= link_to '作成ページへ戻る', new_user_train_path(@user) %>
+<%= link_to '種目作成へ戻る',new_user_train_path(@user) %>

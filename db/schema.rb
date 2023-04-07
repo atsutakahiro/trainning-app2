@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20230406213618) do
+ActiveRecord::Schema.define(version: 20230407023511) do
 
   create_table "repeats", force: :cascade do |t|
     t.integer "sets"
@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20230406213618) do
     t.string "back_exercises"
     t.string "reg_exercises"
     t.string "exercises"
+    t.integer "set_num"
     t.index ["user_id"], name: "index_trains_on_user_id"
   end
 
