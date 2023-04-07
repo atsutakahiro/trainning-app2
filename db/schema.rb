@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20230405033348) do
+ActiveRecord::Schema.define(version: 20230406213618) do
+
+  create_table "repeats", force: :cascade do |t|
+    t.integer "sets"
+    t.text "remark"
+    t.integer "train_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "set_number"
+    t.index ["train_id"], name: "index_repeats_on_train_id"
+  end
 
   create_table "trains", force: :cascade do |t|
     t.string "exercise"
@@ -22,6 +32,15 @@ ActiveRecord::Schema.define(version: 20230405033348) do
     t.integer "weight"
     t.integer "rep"
     t.string "name"
+    t.integer "sets"
+    t.string "chest_exercises"
+    t.string "shoulder_exercises"
+    t.string "biceps_exercises"
+    t.string "triceps_exercises"
+    t.string "abdominal_exercises"
+    t.string "back_exercises"
+    t.string "reg_exercises"
+    t.string "exercises"
     t.index ["user_id"], name: "index_trains_on_user_id"
   end
 
