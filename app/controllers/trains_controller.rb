@@ -3,12 +3,14 @@ class TrainsController < ApplicationController
   def new
     @user = User.find(params[:user_id])
     @train = @user.trains.build
+    @trains = @user.trains.all 
     @parts = ["胸", "肩", "上腕二頭筋", "上腕三頭筋", "腹筋", "背中", "脚"]
   end
   
   def create
     @user = User.find(params[:user_id])
     @train = @user.trains.build(train_params)
+    @trains = @user.trains.all # この行を追加
     if @train.part == "胸"
       @exercises = ["ベンチプレス", "ダンベルプレス", "インクラインベンチプレス", "インクラインダンベルフライ", "ダンベルフライ", "インクラインチェストプレス", "チェストプレス", "ケーブルカール"]
     elsif @train.part == "肩"
@@ -25,6 +27,15 @@ class TrainsController < ApplicationController
       @exercises = ["スクワット", "レッグプレス", "レッグエクステンション", "レッグレイズ", "ブルガリアンスクワット"]
     end
 
+    if @train.save
+      flash[:success] = "新規作成に成功しました"
+      render '_form.html.erb'
+    else
+      flash[:error] = "新規作成に失敗しました"
+      render 'new'
+    end
+  end
+
   def update
     @user = User.find(params[:user_id])
     @train = @user.trains.find(params[:id])
@@ -37,15 +48,7 @@ class TrainsController < ApplicationController
     end
   end
 
-    if @train.save
-      flash[:success] = "新規作成に成功しました"
-      render "_form.html.erb"
-    else
-      flash.now[:danger] = "新規作成に失敗しました"
-      render 'new'
-    end
-  end
-
+    
   def index
     @user = User.find(params[:user_id])
     @trains = @user.trains.all

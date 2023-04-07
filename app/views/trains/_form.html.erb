@@ -1,10 +1,11 @@
 <h1>トレーニング種目新規作成</h1>
 <%= form_with(model: @train, url: user_train_path(@user, @train), local: true) do |form| %>
-  <%= form.label :part, "トレーニングの部位" %>
+  <%= form.label :name, "トレーニングの部位" %>
   <%= form.text_field :part, readonly: true %>
 
   <%= form.label :exercise, "種目の名前" %>
-  <%= form.select :exercise, @exercises, prompt: '選択してください' %>
+  <%= form.select :exercise, options_for_select(@exercises) %>
+
   <%= form.label :weight, "重量" %>
   <%= form.number_field :weight %>
 
