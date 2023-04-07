@@ -8,6 +8,8 @@
           <th scope="col">セット数</th>
           <th scope="col">重量(kg)</th>
           <th scope="col">レップ</th>
+          <th></th>
+          <th></th>
         </tr>
       </thead>  
       <tbody>
@@ -16,6 +18,9 @@
             <th scope="row"><%= i + 1 %></th>
             <td><%= train.weight %></td>
             <td><%= train.rep %></td>
+            <td><%= link_to '編集', edit_user_train_path(@user, train), class: 'btn btn-success' %></td>
+            <td><%= link_to '削除', user_train_path(@user, train), method: :delete, class: 'btn btn-danger', data: { confirm: '本当に削除しますか？' } %></td>
+
           </tr>
         <% end %>
       </tbody>

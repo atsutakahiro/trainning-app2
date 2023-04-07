@@ -1,0 +1,19 @@
+<h1>トレーニング種目編集</h1>
+
+<%= form_with(model: [@user, @train], local: true) do |form| %>
+  <%= form.label :name, "トレーニングの部位" %>
+  <%= form.text_field :part, readonly: true %>
+
+  <%= form.label :exercise, "種目の名前" %>
+  <%= form.select :exercise, options_for_select(@exercises, @train.exercise) %>
+
+  <%= form.label :weight, "重量" %>
+  <%= form.number_field :weight, value: @train.weight %>
+
+  <%= form.label :rep, "レップ数" %>
+  <%= form.number_field :rep, value: @train.rep %>
+
+  <%= form.submit "更新" %>
+<% end %>
+
+<%= link_to 'トレーニング種目一覧に戻る', user_trains_path(@user) %>
