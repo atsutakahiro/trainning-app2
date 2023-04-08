@@ -54,6 +54,7 @@ class TrainsController < ApplicationController
   def set_train
     @train = @user.trains.find(params[:id])
   end
+  
 
   def set_exercises
     if @train.part == "胸"
@@ -74,6 +75,6 @@ class TrainsController < ApplicationController
   end
     
   def train_params
-    params.require(:train).permit(:part, :exercise, :name, :weight, :rep).merge(user_id: params[:user_id])
+    params.require(:train).permit(:part, :exercise, :name, :weight, :rep, :note).merge(user_id: params[:user_id])
   end
 end
