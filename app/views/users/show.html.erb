@@ -2,3 +2,36 @@
 <div class="space">
   <h1><%= @user.name %>, <%= @user.email %></h1>
 </div>
+
+<%# トレーニング一覧 %>
+<% if @user.trains.any? %>
+  <div class="space">
+    <h2>トレーニング一覧</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>部位</th>
+          <th>種目</th>
+          <th>重量</th>
+          <th>レップ数</th>
+          <th>備考</th>
+          
+          <th>更新日</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.trains.each do |train| %>
+          <tr>
+            <td><%= train.part %></td>
+            <td><%= train.exercise %></td>
+            <td><%= train.weight %></td>
+            <td><%= train.rep %></td>
+            <td><%= train.note %></td>
+            
+            <td><%= train.updated_at.strftime('%Y年%m月%d日') %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  
+<% end %>

@@ -13,20 +13,20 @@ class TrainsController < ApplicationController
     @trains = @user.trains.all
     set_exercises
     if @train.save
-      flash[:success] = "新規作成に成功しました"
+      flash[:success] = "部位を選択しました"
       render '_form.html.erb'
     else
-      flash[:error] = "新規作成に失敗しました"
+      flash[:error] = "部位の選択に失敗しました"
       render 'new'
     end
   end
 
   def update
     if @train.update(train_params)
-      flash[:success] = "更新に成功しました"
+      flash[:success] = "種目を選択しました"
       redirect_to user_trains_path(@user)
     else
-      flash[:danger] = "更新に失敗しました"
+      flash[:danger] = "種目の選択に失敗しました"
       render 'edit'
     end
   end

@@ -10,7 +10,7 @@ class RepeatsController < ApplicationController
     redirect_to @train
   end
 
-  def rep
+  def rep     
     [set_number, weight, repetition, remark].join('/')
   end
   
