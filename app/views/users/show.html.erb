@@ -1,37 +1,39 @@
-<% provide(:title, @user.name) %>
-<div class="space">
-  <h1><%= @user.name %>, <%= @user.email %></h1>
-</div>
-
 <%# トレーニング一覧 %>
 <% if @user.trains.any? %>
   <div class="space">
     <h2>トレーニング一覧</h2>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>部位</th>
-          <th>種目</th>
-          <th>重量</th>
-          <th>レップ数</th>
-          <th>備考</th>
-          
-          <th>更新日</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @user.trains.each do |train| %>
-          <tr>
-            <td><%= train.part %></td>
-            <td><%= train.exercise %></td>
-            <td><%= train.weight %></td>
-            <td><%= train.rep %></td>
-            <td><%= train.note %></td>
-            
-            <td><%= train.updated_at.strftime('%Y年%m月%d日') %></td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  
+    <div class="list-group">
+      <% trains_by_date = @user.trains.group_by { |train| train.updated_at.to_date } %>
+      <% trains_by_date.each do |date, trains| %>
+        <li class="list-group-item">
+          <a data-toggle="collapse" href="#<%= date %>" aria-expanded="false" aria-controls="<%= date %>"><%= date %></a>
+          <% trains.each do |train| %>
+            <a data-toggle="collapse" href="#<%= "#{date}-#{train.part}" %>" aria-expanded="false" aria-controls="<%= "#{date}-#{train.part}" %>"><%= train.part %></a>
+            <div class="collapse" id="<%= "#{date}-#{train.part}" %>">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>部位</th>
+                    <th>種目</th>
+                    <th>重量</th>
+                    <th>レップ数</th>
+                    <th>備考</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><%= train.part %></td>
+                    <td><%= train.exercise %></td>
+                    <td><%= train.weight %></td>
+                    <td><%= train.rep %></td>
+                    <td><%= train.note %></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          <% end %>
+        </li>
+      <% end %>
+    </div>
+  </div>
 <% end %>
