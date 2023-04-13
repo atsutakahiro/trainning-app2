@@ -1,13 +1,5 @@
 class UsersController < ApplicationController
 
-  def show
-    @user = User.find(params[:id])
-  end
-
-  def new
-    @user = User.new
-  end
-
   def create
     @user = User.new(user_params)
     if @user.save
@@ -23,6 +15,26 @@ class UsersController < ApplicationController
   def edit
     @user = User.find(params[:id])
   end
+
+  def new
+      @user = User.new
+  end
+
+  def part
+  end
+  
+  def show
+    @user = User.find(params[:id])
+    @date = Date.parse(params[:date]) rescue Date.today
+    @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day)
+    @exercise = @trains.first.part
+  end
+
+  
+
+  
+
+  
   private
 
     def user_params

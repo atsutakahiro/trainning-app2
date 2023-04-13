@@ -5,7 +5,7 @@ class TrainsController < ApplicationController
   def new
     @train = @user.trains.build
     @trains = @user.trains.all 
-    @parts = ["胸", "肩", "上腕二頭筋", "上腕三頭筋", "腹筋", "背中", "脚"]
+    @parts = Train::PARTS
   end
   
   def create
@@ -22,12 +22,13 @@ class TrainsController < ApplicationController
   end
 
   def update
-    if @train.update(train_params)
+    if train_params[:rep].present?
+      @train.update(train_params)
       flash[:success] = "種目を選択しました"
       redirect_to user_trains_path(@user)
     else
       flash[:danger] = "種目の選択に失敗しました"
-      render 'edit'
+      redirect_to new_user_train_path
     end
   end
 
@@ -42,8 +43,19 @@ class TrainsController < ApplicationController
   end
 
   def index
-    @trains = @user.trains.all
+    @trains = @user.trains
+    if @trains.present?
+      @latest_date = @trains.last.created_at.to_date
+    else
+      @latest_date = Date.today
+    end
   end
+
+  def show
+    @date = Date.parse(params[:date]) # 日付の取得
+    @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day) # 指定された日付のトレーニング情報の取得
+  end
+  
 
   private
 

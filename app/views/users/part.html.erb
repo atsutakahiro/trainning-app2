@@ -1,0 +1,46 @@
+<h2>部位別トレーニング記録</h2>
+
+<%= form_tag(user_part_path(@user), method: :get) do %>
+  <div class="form-group">
+    <%= label_tag :part, '部位で検索' %>
+    <%= select_tag :part, options_for_select(['', '胸', '背中', '腹筋', '脚', '上腕二頭筋', '上腕三頭筋', '肩'], params[:part]), class: 'form-control' %>
+  </div>
+  
+  <div class="form-group">
+    <%= label_tag :exercise, '種目で検索' %>
+    <%= select_tag :exercise, options_for_select(['', 'ベンチプレス', 'デッドリフト', 'スクワット', 'プルアップ', 'チンニング', 'ショルダープレス'], params[:exercise]), class: 'form-control' %>
+  <%= submit_tag "検索", class: 'btn btn-primary' %>
+<% end %>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">日付</th>
+      <th scope="col">種目</th>
+      <th scope="col">セット数</th>
+      <th scope="col">重量(kg)</th>
+      <th scope="col">レップ</th>
+      <th scope="col">RM</th>
+      <th scope="col">備考</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @trains.each do |train| %>
+      <tr>
+        <td><%= l train.created_at.to_date %></td>
+        <td><%= train.exercise %></td>
+        <td><%= train.sets %></td>
+        <td><%= train.weight %></td>
+        <td><%= train.rep %></td>
+        <td><%= train.rm %></td>
+        <td><%= train.note %></td>
+        <td><%= link_to '編集', edit_user_train_path(@user, train), class: 'btn btn-success' %></td>
+        <td><%= link_to '削除', user_train_path(@user, train), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to '戻る', user_path(@user), class: 'btn btn-primary' %>
