@@ -34,7 +34,7 @@
         <td><%= train.sets %></td>
         <td><%= train.weight %></td>
         <td><%= train.rep %></td>
-        <td><%= train.rm %></td>
+        <td><%= train.rm.to_i %></td>
         <td><%= train.note %></td>
         <td><%= link_to '編集', edit_user_train_path(@user, train), class: 'btn btn-success' %></td>
         <td><%= link_to '削除', user_train_path(@user, train), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %></td>
