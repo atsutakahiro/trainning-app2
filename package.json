@@ -1,5 +1,7 @@
 {
   "name": "trainning-app2",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "chart.js": "^4.2.1"
+  }
 }

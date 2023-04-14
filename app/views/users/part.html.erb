@@ -43,4 +43,23 @@
   </tbody>
 </table>
 
+<button type="button" class="btn btn-info" onclick="showGraph()">データをグラフ化する</button>
+
+<div id="chart"></div>
+
 <%= link_to '戻る', user_path(@user), class: 'btn btn-primary' %>
+
+<script>
+  function showGraph() {
+  var data = {};
+  <% @filtered_trains.each do |train| %>
+    var date = '<%= train.created_at.to_date.strftime("%Y年%-m月%-d日") %>';
+    var rm = <%= train.rm.to_i %>;
+    if (!data[date] || data[date] < rm) {
+      data[date] = rm;
+    }
+  <% end %>
+  new Chartkick.LineChart('chart', data);
+}
+</script>
+
