@@ -41,7 +41,7 @@ end
     @user = User.find(params[:id])
     @date = Date.parse(params[:date]) rescue Date.today
     @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day)
-    @exercise = @trains.first.part
+    @exercise = @trains.first.part if @trains.present?
   end
 
   

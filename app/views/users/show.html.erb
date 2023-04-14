@@ -1,8 +1,9 @@
 <%# トレーニング一覧 %>
+<h2><%= @user.name %>さんのトレーニング一覧</h2>
+    
 <% if @user.trains.any? %>
 
   <div class="space">
-    <h2>トレーニング一覧</h2>
     <div class="list-group">
       <% trains_by_date = @user.trains.group_by { |train| train.updated_at.to_date } %>
       <% trains_by_date.each do |date, trains| %>
@@ -10,12 +11,16 @@
           <%= link_to I18n.l(date, format: '%m/%d (%^a)'), user_train_path(@user, trains.first, date: date) %>
           <% exercises = trains.map(&:part).uniq %>
           <% exercises.each do |exercise| %>
-            <%= exercise %> 
-          <% end %>
+          <span style="color: <%= color_for(exercise) %>;"><%= exercise %></span> 
+          <% end %>          
         </li>
       <% end %>
     </div>
   </div>
+<% else %>
+  <p>トレーニング記録がありません</p>
 <% end %>
 
+
 <%= link_to '部位別に表示する', part_user_path(current_user) %>
+
