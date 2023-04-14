@@ -11,6 +11,6 @@ Rails.application.routes.draw do
   
   resources :users do
     resources :trains 
-      get 'part', on: :collection
+    get 'part', on: :member
   end
 end

@@ -21,7 +21,21 @@ class UsersController < ApplicationController
   end
 
   def part
+    @user = User.find(params[:id])
+    @part = params[:part]
+
+  if @part.present?
+    @trains = @user.trains.where(part: @part)
+  elsif params[:exercise].present?
+    @trains = @user.trains.where(exercise: params[:exercise])
+  else
+    @trains = @user.trains
   end
+
+  # 新しい検索フォームを表示する前に、params[:part]とparams[:exercise]をnilに設定する
+  params[:part] = nil
+  params[:exercise] = nil
+end
   
   def show
     @user = User.find(params[:id])

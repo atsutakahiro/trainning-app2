@@ -6,6 +6,7 @@ class Train < ApplicationRecord
   # 略
 
   def rm
+    return nil unless self.weight && self.rep
     self.weight * (1 + self.rep / 40.0)
   end
 end

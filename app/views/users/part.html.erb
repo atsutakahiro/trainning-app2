@@ -1,6 +1,6 @@
 <h2>部位別トレーニング記録</h2>
 
-<%= form_tag(user_part_path(@user), method: :get) do %>
+<%= form_tag(part_user_path(@user), method: :get) do %>
   <div class="form-group">
     <%= label_tag :part, '部位で検索' %>
     <%= select_tag :part, options_for_select(['', '胸', '背中', '腹筋', '脚', '上腕二頭筋', '上腕三頭筋', '肩'], params[:part]), class: 'form-control' %>
