@@ -2,7 +2,8 @@
   <h2><%= exercise %></h2>
   <table class="table table-bordered">
     <thead>
-      <tr>        
+      <tr>
+        <th scope="col">日付</th>        
         <th scope="col">セット数</th>
         <th scope="col">重量(kg)</th>
         <th scope="col">レップ</th>
@@ -15,6 +16,7 @@
     <tbody>
       <% trains.each_with_index do |train, i| %>
         <tr>
+          <th scope="row"><%= train.created_at.to_date %></th>
           <th scope="row"><%= i + 1 %></th>
           <td><%= train.weight %></td>
           <td><%= train.rep %></td>

@@ -10,6 +10,7 @@ class TrainsController < ApplicationController
   
   def create
     @train = @user.trains.build(train_params)
+    @train.created_at = params[:train][:date]
     @trains = @user.trains.all
     set_exercises
     if @train.save
@@ -55,6 +56,8 @@ class TrainsController < ApplicationController
     @date = Date.parse(params[:date]) # 日付の取得
     @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day) # 指定された日付のトレーニング情報の取得
   end
+
+  
   
 
   private

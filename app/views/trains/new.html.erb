@@ -3,8 +3,9 @@
   <%= form.label :part, "トレーニングの部位" %>
   <%= form.select :part, options_for_select(@parts) %>
 
+  <%= form.label :date, "日付を選択" %>
+  <%= form.date_field :date, required: true %>
+
   <%= form.submit "選択" %>
 <% end %>
 
-
-　

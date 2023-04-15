@@ -1,14 +1,13 @@
 <%# トレーニング一覧 %>
 <h2><%= @user.name %>さんのトレーニング一覧</h2>
-    
-<% if @user.trains.any? %>
 
+<% if @user.trains.any? %>
   <div class="space">
     <div class="list-group">
-      <% trains_by_date = @user.trains.group_by { |train| train.updated_at.to_date } %>
+      <% trains_by_date = @user.trains.group_by { |train| train.created_at.to_date } %>
       <% trains_by_date.each do |date, trains| %>
         <li class="list-group-item">
-          <%= link_to I18n.l(date, format: '%m/%d (%^a)'), user_train_path(@user, trains.first, date: date) %>
+          <%= link_to I18n.l(date, format: '%Y/%m/%d (%^a)'), past_trains_user_trains_path(@user, date: date) %>
           <% exercises = trains.map(&:part).uniq %>
           <% exercises.each do |exercise| %>
           <span style="color: <%= color_for(exercise) %>;"><%= exercise %></span> 
@@ -21,6 +20,29 @@
   <p>トレーニング記録がありません</p>
 <% end %>
 
+<%= link_to '過去のトレーニングを追加する', '#pastTrainModal', class: 'btn btn-primary', data: { toggle: 'modal' } %>
+
+<!-- Past Train Modal -->
+<div class="modal fade" id="pastTrainModal" tabindex="-1" role="dialog" aria-labelledby="pastTrainModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pastTrainModalLabel">過去のトレーニングを追加する</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= form_tag new_user_train_path(@user), method: :get do %>
+          <div class="form-group">
+            <%= label_tag :date, "トレーニング日を選択してください" %>
+            <%= date_field_tag :date, nil, class: "form-control", required: true %>
+          </div>
+          <%= submit_tag "トレーニングを追加する", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= link_to '部位別に表示する', part_user_path(current_user) %>
-
