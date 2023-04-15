@@ -25,11 +25,11 @@ class UsersController < ApplicationController
     @part = params[:part]
   
     if @part.present?
-      @trains = @user.trains.where(part: @part)
+      @trains = @user.trains.where(part: @part).order(created_at: :asc)
     elsif params[:exercise].present?
-      @trains = @user.trains.where(exercise: params[:exercise])
+      @trains = @user.trains.where(exercise: params[:exercise]).order(created_at: :asc)
     else
-      @trains = @user.trains
+      @trains = @user.trains.order(created_at: :asc)
     end
   
     @filtered_trains = params[:exercise].present? ? @trains.where(exercise: params[:exercise]) : []

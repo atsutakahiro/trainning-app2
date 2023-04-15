@@ -25,10 +25,10 @@ class TrainsController < ApplicationController
   def update
     if train_params[:rep].present?
       @train.update(train_params)
-      flash[:success] = "種目を選択しました"
+      flash[:success] = "データを更新しました"
       redirect_to user_trains_path(@user)
     else
-      flash[:danger] = "種目の選択に失敗しました"
+      flash[:danger] = "データの更新に失敗しました"
       redirect_to new_user_train_path
     end
   end
