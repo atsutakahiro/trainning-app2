@@ -4,7 +4,7 @@
 <% if @user.trains.any? %>
   <div class="space">
     <div class="list-group">
-      <% trains_by_date = @user.trains.group_by { |train| train.created_at.to_date } %>
+      <% trains_by_date = @user.trains.group_by { |train| train.created_at.to_date }.sort %>
       <% trains_by_date.each do |date, trains| %>
         <li class="list-group-item">
           <%= link_to I18n.l(date, format: '%Y/%m/%d (%^a)'), past_trains_user_trains_path(@user, date: date) %>

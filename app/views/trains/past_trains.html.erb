@@ -1,0 +1,39 @@
+<h2><%= @user.name %>さんの <%= I18n.l(@date, format: '%Y/%m/%d (%^a)') %> のトレーニング一覧</h2>
+
+<% @trains.group_by(&:exercise).each do |exercise, trains| %>
+  <h3><%= exercise %></h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">セット数</th>
+        <th scope="col">重量(kg)</th>
+        <th scope="col">レップ</th>
+        <th scope="col">RM</th>
+        <th scope="col">備考</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% trains.each_with_index do |train, i| %>
+        <tr>
+          <th scope="row"><%= i + 1 %></th>
+          <td><%= train.weight %></td>
+          <td><%= train.rep %></td>
+          <% if train.weight.present? && train.rep.present? %>
+            <% rm = train.rm %>
+            <td><%= rm.present? ? rm.round(2) : '' %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+          <td><%= train.note %></td>
+          <td><%= link_to '編集', edit_user_train_path(@user, train), class: 'btn btn-success' %></td>
+          <td><%= link_to '削除', user_train_path(@user, train), method: :delete, class: 'btn btn-danger', data: { confirm: '本当に削除しますか？' } %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+<%= link_to 'トレーニングの新規作成', new_user_train_path(@user), class: 'btn btn-primary' %>
+<%= link_to 'トレーニングの一覧へ', user_path(@user), class: 'btn btn-primary' %>
+

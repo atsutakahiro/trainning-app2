@@ -10,6 +10,9 @@ Rails.application.routes.draw do
 
   resources :users do
     resources :trains do
+      collection do
+        get 'past_trains'
+      end
     end
     get 'part', on: :member
   end

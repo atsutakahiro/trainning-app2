@@ -57,6 +57,11 @@ class TrainsController < ApplicationController
     @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day) # 指定された日付のトレーニング情報の取得
   end
 
+  def past_trains
+    @user = User.find(params[:user_id])
+    @date = params[:date].to_date
+    @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day)
+  end
   
   
 
