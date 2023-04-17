@@ -13,6 +13,9 @@ gem 'turbolinks',   '~> 5'
 gem 'jbuilder',     '~> 2.5'
 gem 'pry-rails'
 gem 'chartkick'
+gem 'line-bot-api'
+gem 'dotenv-rails', groups: [:development, :test]
+
 
 group :development, :test do
   gem 'sqlite3'

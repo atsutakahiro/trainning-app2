@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   get 'sessions/new'
 
+  post '/line_bot/callback', to: 'line_bot#callback'
+
+
   root 'static_pages#top'
   get '/signup', to: 'users#new'
 
