@@ -21,7 +21,7 @@
           <td><%= train.weight %></td>
           <td><%= train.rep %></td>
           
-          <% if train.weight.present? && train.rep.present? %>
+          <% if train.weight.present? && train.rep.present?%>
             <% rm = train.rm %>
             <td><%= rm.present? ? rm.round(2) : '' %></td>
           <% else %>
