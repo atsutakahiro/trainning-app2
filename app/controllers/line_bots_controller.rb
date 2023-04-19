@@ -85,7 +85,7 @@ class LineBotController < ApplicationController
         created_at: Time.now,
         updated_at: Time.now
       )
-  
+     
       if train.save
         "トレーニングデータを保存しました"
       else
