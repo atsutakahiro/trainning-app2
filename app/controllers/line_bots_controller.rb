@@ -6,8 +6,6 @@ class LineBotController < ApplicationController
   
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
- 
-
 
   def callback
     body = request.body.read
@@ -24,14 +22,17 @@ class LineBotController < ApplicationController
           # line_user_idのログ出力
           Rails.logger.info "LINE User ID: #{line_user_id}"
   
-          training_data = parse_training_message(message_text)
-  
-          if training_data.present?
-            response_message = save_training_data(training_data, line_user_id)
+          if message_text == 'ID'
+            response_message = "あなたのLINE User IDは #{line_user_id} です。Webページで新規登録時に入力してください。"
           else
-            response_message = "メッセージの形式が正しくありません。正しい形式で入力してください。"
+            training_data = parse_training_message(message_text)
+            if training_data.present?
+              response_message = save_training_data(training_data, line_user_id)
+            else
+              response_message = "メッセージの形式が正しくありません。正しい形式で入力してください。"
+            end
           end
-  
+          
           message = {
             type: 'text',
             text: response_message
@@ -43,7 +44,6 @@ class LineBotController < ApplicationController
   
     head :ok
   end
-  
 
   private
 
@@ -55,8 +55,6 @@ class LineBotController < ApplicationController
   end
 
   def parse_training_message(message_text)
-    # 正規表現で入力文字列をパースします
-    # 例: 胸, ベンチプレス, 100kg, 3, ギリギリ
     pattern = /^(.+),\s*(.+),\s*(\d+(?:\.\d+)?)(?:kg)?,\s*(\d+),\s*(.+)$/i
     matches = pattern.match(message_text)
   
@@ -74,8 +72,6 @@ class LineBotController < ApplicationController
   end
   
   def save_training_data(training_data, line_user_id)
-    # ここでデータベースにトレーニングデータを保存します
-    # 実際のアプリケーションでは適切なユーザーIDを取得して使用してください
     user = User.find_by(line_user_id: line_user_id)
   
     if user
