@@ -15,6 +15,8 @@
               <li class="divider"></li>
               
               <li><%= link_to "種目追加", new_user_train_path(current_user) %></li>
+              <li><%= link_to "トレーニングの一覧", user_path(current_user) %></li>
+
               <li><%= link_to "Log out", logout_path, method: :delete %></li>
               </li>
             </ul> 

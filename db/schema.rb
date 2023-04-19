@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20230408193330) do
+ActiveRecord::Schema.define(version: 20230418200713) do
 
   create_table "repeats", force: :cascade do |t|
     t.integer "sets"
@@ -54,7 +54,9 @@ ActiveRecord::Schema.define(version: 20230408193330) do
     t.datetime "updated_at", null: false
     t.string "password_digest"
     t.string "remember_digest"
+    t.string "line_user_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["line_user_id"], name: "index_users_on_line_user_id", unique: true
   end
 
 end
