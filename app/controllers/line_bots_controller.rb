@@ -6,7 +6,7 @@ class LineBotController < ApplicationController
   
   protect_from_forgery with: :null_session
   skip_before_action :verify_authenticity_token
-  Rails.logger.info "LINE User ID: #{line_user_id}"
+ 
 
 
   def callback
