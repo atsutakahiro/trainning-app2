@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+before_action :correct_user, only: [:edit, :update, :show]
   def create
     @user = User.new(user_params)
     if @user.save
@@ -58,5 +58,10 @@ class UsersController < ApplicationController
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation, :line_user_id)
+    end
+
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless @user == current_user
     end
 end

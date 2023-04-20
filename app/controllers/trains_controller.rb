@@ -1,7 +1,7 @@
 class TrainsController < ApplicationController
   before_action :set_user
   before_action :set_train, only: [:edit, :update, :destroy]
-
+  before_action :correct_user, only: [:edit, :update, :destroy, :new, :show]
   def new
     @train = @user.trains.build
     @trains = @user.trains.all 
@@ -73,6 +73,11 @@ class TrainsController < ApplicationController
 
   def set_train
     @train = @user.trains.find(params[:id])
+  end
+
+  def correct_user
+    @user = User.find(params[:user_id])
+    redirect_to root_path unless @user == current_user
   end
   
 
