@@ -1,9 +1,10 @@
 <% provide(:title, "Top") %>
 <div class="bg">
   <div class="sign">
-    <%= link_to "新規登録", signup_path, class: "btn btn-lg 
-    btn-success" %>
-    <%= link_to "ログイン", login_path, class: "btn btn-lg btn-primary" %>
-    
+    <%# もしログインしていない場合 %>
+    <% if !logged_in? %>
+      <%= link_to "新規登録", signup_path, class: "btn btn-lg btn-success" %>
+      <%= link_to "ログイン", login_path, class: "btn btn-lg btn-primary" %>
+    <% end %>
   </div>
 </div>
