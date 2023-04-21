@@ -1,6 +1,13 @@
 <%# トレーニング一覧 %>
 <h2><%= @user.name %>さんのトレーニング一覧</h2>
 
+<%# 日付で検索する機能 %>
+<%= form_with(url: user_trains_path(@user), method: :get, local: true) do |form| %>
+  <%= form.label :date, "日付を選択" %>
+  <%= form.date_field :date, required: true %>
+  <%= form.submit "検索" %>
+<% end %>
+
 <% if @user.trains.any? %>
   <div class="space">
     <div class="list-group">
