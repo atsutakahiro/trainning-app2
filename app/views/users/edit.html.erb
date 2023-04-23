@@ -16,6 +16,9 @@
 
       <%= f.label :password_confirmation, class: "label-signup" %>
       <%= f.password_field :password_confirmation, class: "form-control" %>
+
+      <%= f.label :line_user_id, "LINE User ID（LINEボットに「ID」とメッセージを送信して取得してください）", class: "label-signup" %>
+      <%= f.text_field :line_user_id, class: "form-control" %>
       
       <%= f.submit "更新", class: "btn btn-primary btn-block btn-signup" %>
     <% end %>
