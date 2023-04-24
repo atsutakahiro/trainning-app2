@@ -3,7 +3,6 @@ Rails.application.routes.draw do
 
   post '/line_bot/callback', to: 'line_bot#callback'
 
-
   root 'static_pages#top'
   get '/signup', to: 'users#new'
 
@@ -12,6 +11,9 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy'
 
   resources :users do
+    member do
+      get 'line', action: :line_id
+    end
     resources :trains do
       collection do
         get 'past_trains'

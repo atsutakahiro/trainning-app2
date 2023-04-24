@@ -1,0 +1,12 @@
+<% provide(:title, 'edit') %>
+<div class="space">
+  <h1>LINEユーザーIDを追加する</h1>
+  <div class="row">
+    <%= form_with(model: @user, local: true) do |f| %>
+      <%= render 'shared/error_messages'%>
+
+      <%= f.label :line_user_id, class: "label-signup" %>
+      <%= f.text_field :line_user_id, class: "form-control" %>
+
+       <%= f.submit "追加", class: "btn btn-primary btn-block btn-signup" %>
+    <% end %>
