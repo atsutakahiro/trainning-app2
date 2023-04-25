@@ -1,11 +1,13 @@
-<h1>トレーニングの部位選択</h1>
-<%= form_with(model: @train, url: user_trains_path(@user), local: true) do |form| %>
-  <%= form.label :part, "トレーニングの部位" %>
-  <%= form.select :part, options_for_select(@parts) %>
+<h1>トレーニングの部位選択を選択してください</h1>
+<div class="format">
+  <%= form_with(model: @train, url: user_trains_path(@user), local: true) do |form| %>
+      <%= form.label :part, "トレーニングの部位" %>
+      <%= form.select :part, options_for_select(@parts) %>
 
-  <%= form.label :date, "日付を選択" %>
-  <%= form.date_field :date, required: true %>
+      <%= form.label :date, "日付を選択" %>
+      <%= form.date_field :date, required: true %>
 
-  <%= form.submit "選択" %>
-<% end %>
+      <%= form.submit "選択" %>
+  <% end %>
+</div>
 

@@ -1,20 +1,40 @@
-<%= form_with(model: @user, local: true) do |f| %>
-  <%= render 'shared/error_messages', object: @user %>
+<h2>新規登録</h2>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <%= form_with(model: @user, local: true) do |f| %>
+          <%= render 'shared/error_messages', object: @user %>
 
-  <%= f.label :name, class: "label-#{yield(:class_text)}" %>
-  <%= f.text_field :name, class: "form-control" %>
+          <%= f.label :name, class: "label-#{yield(:class_text)}" %>
+          <%= f.text_field :name, class: "form-control" %>
 
-  <%= f.label :email, class: "label-#{yield(:class_text)}" %>
-  <%= f.email_field :email, class: "form-control" %>
+          <%= f.label :email, class: "label-#{yield(:class_text)}" %>
+          <%= f.email_field :email, class: "form-control" %>
 
-  <%= f.label :password, class: "label-#{yield(:class_text)}" %>
-  <%= f.password_field :password, class: "form-control" %>
+          <%= f.label :password, class: "label-#{yield(:class_text)}" %>
+          <%= f.password_field :password, class: "form-control" %>
 
-  <%= f.label :password_confirmation, class: "label-#{yield(:class_text)}" %>
-  <%= f.password_field :password_confirmation, class: "form-control" %>
+          <%= f.label :password_confirmation, class: "label-#{yield(:class_text)}" %>
+          <%= f.password_field :password_confirmation, class: "form-control" %>
 
-  <%= f.label :line_user_id, "LINE User ID（LINEボットに「ID」とメッセージを送信して取得してください）", class: "label-#{yield(:class_text)}" %>
-  <%= f.text_field :line_user_id, class: "form-control" %>
+          <%= f.label :line_user_id, "LINE User ID（LINEボットに「ID」とメッセージを送信して取得してください）", class: "label-#{yield(:class_text)}" %>
+          <%= f.text_field :line_user_id, class: "form-control" %>
 
-  <%= f.submit yield(:button_text), class: "btn btn-primary btn-block btn-#{yield(:class_text)}" %>
-<% end %>
+          <%= f.submit yield(:button_text), class: "btn btn-primary btn-block btn-#{yield(:class_text)}" %>
+        <% end %>
+     </div>
+      <div class="col-md-6">
+        <p>
+          このアプリケーションでは、LINEボットとの連携が必要です。以下の手順で友達登録を行い、LINE User IDを取得してください。
+        </p>
+        <ol>
+          <li>LINEアプリで、以下のQRコードをスキャンし、LINEボットを友達登録してください。</li>
+          <li>LINEボットに「ID」とメッセージを送信して、返信されるLINE User IDをメモしてください。</li>
+        </ol>
+        <!-- ここにQRコードを表示 -->
+        <%= image_tag "qr_code.png", alt: "QRコード" %>
+      </div>
+
+    </div>
+  </div>
+
