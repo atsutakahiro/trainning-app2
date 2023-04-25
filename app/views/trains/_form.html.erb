@@ -1,22 +1,37 @@
-<h1>トレーニング種目新規作成</h1>
-<%= form_with(model: @train, url: user_train_path(@user, @train), local: true) do |form| %>
-  <%= form.label :name, "トレーニングの部位" %>
-  <%= form.text_field :part, readonly: true %>
-
-  <%= form.label :exercise, "種目の名前" %>
-  <%= form.select :exercise, options_for_select(@exercises) %>
-
-  <%= form.label :weight, "重量（kg）" %>
-  <%= form.number_field :weight %>
-
-  <%= form.label :rep, "レップ数" %>
-  <%= form.number_field :rep %>
-
-  <%= form.label :note, "備考" %>
-  <%= form.number_field :note %>
-
-  <%= form.submit "作成" %>
-
- 
-  <%= link_to "トレーニング一覧へ", user_trains_path(@user) %>
- <% end %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header bg-primary text-white text-center">
+          <h3>トレーニング種目新規作成</h3>
+        </div>
+        <div class="card-body">
+          <%= form_with(model: @train, url: user_train_path(@user, @train), local: true) do |form| %>
+            <div class="form-group">
+              <%= form.label :name, "トレーニングの部位", class: "font-weight-bold" %>
+              <%= form.text_field :part, readonly: true, class: "form-control", placeholder: "例：胸・腕・背中など" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :exercise, "種目の名前", class: "font-weight-bold" %>
+              <%= form.select :exercise, options_for_select(@exercises), {}, class: "form-control", prompt: "種目を選択してください" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :weight, "重量（kg）", class: "font-weight-bold" %>
+              <%= form.number_field :weight, class: "form-control", placeholder: "例：60" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :rep, "レップ数", class: "font-weight-bold" %>
+              <%= form.number_field :rep, class: "form-control", placeholder: "例：10" %>
+            </div>
+            <div class="form-group">
+              <%= form.label :note, "備考", class: "font-weight-bold" %>
+              <%= form.text_field :note, class: "form-control", placeholder: "例：今日は調子がよかった" %>
+            </div>
+            <%= form.submit "作成", class: "btn btn-primary btn-block" %>
+            <%= link_to "トレーニング一覧へ", user_trains_path(@user), class: "btn btn-secondary btn-block mt-2" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
