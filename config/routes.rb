@@ -18,6 +18,9 @@ Rails.application.routes.draw do
       collection do
         get 'past_trains'
       end
+      member do
+        get 'past_edit', action: :past_edit
+      end
     end
     get 'part', on: :member
   end

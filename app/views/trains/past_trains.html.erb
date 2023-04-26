@@ -27,7 +27,7 @@
             <td></td>
           <% end %>
           <td><%= train.note %></td>
-          <td><%= link_to '編集', edit_user_train_path(@user, train), class: 'btn btn-success' %></td>
+          <td><%= link_to '編集', past_edit_user_train_path(@user, train), class: 'btn btn-success' %></td>
           <td><%= link_to '削除', user_train_path(@user, train), method: :delete, class: 'btn btn-danger', data: { confirm: '本当に削除しますか？' } %></td>
         </tr>
       <% end %>

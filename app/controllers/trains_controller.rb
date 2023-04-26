@@ -26,12 +26,20 @@ class TrainsController < ApplicationController
     if train_params[:rep].present?
       @train.update(train_params)
       flash[:success] = "データを更新しました"
-      redirect_to user_trains_path(@user)
+  
+      # 直前のページによってリダイレクト先を変更
+      if request.referer.include?('past_edit')
+        redirect_to past_trains_user_trains_path(@user, date: @train.created_at.to_date)
+      else
+        redirect_to user_trains_path(@user)
+      end
     else
       flash[:danger] = "データの更新に失敗しました"
       redirect_to new_user_train_path
     end
   end
+  
+  
 
   def edit
     set_exercises
@@ -59,9 +67,17 @@ class TrainsController < ApplicationController
     @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day) # 指定された日付のトレーニング情報の取得
   end
 
+  def past_edit
+    @user = User.find(params[:user_id])
+    @train = @user.trains.find(params[:id])
+  end
+  
   def past_trains
     @user = User.find(params[:user_id])
-    @date = params[:date].to_date
+  
+    # パラメータから日付が渡されている場合はその日付を、渡されていない場合は今日の日付を使用
+    @date = params[:date] ? params[:date].to_date : Date.today
+  
     @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day)
   end
   
