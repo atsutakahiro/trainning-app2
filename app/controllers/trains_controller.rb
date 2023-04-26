@@ -39,9 +39,11 @@ class TrainsController < ApplicationController
 
   def destroy
     @train.destroy
-    flash[:success] = "削除に成功しました"
-    redirect_to user_trains_path(@user)
+    flash[:success] = "トレーニング記録が削除されました"
+    # デフォルトのリダイレクト先を指定して、リダイレクトする
+    redirect_back(fallback_location: user_trains_url(@user))
   end
+  
 
   def index
     @trains = @user.trains
