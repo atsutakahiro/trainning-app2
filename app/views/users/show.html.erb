@@ -7,6 +7,12 @@
   <%= form.date_field :date, required: true %>
   <%= form.submit "検索" %>
 <% end %>
+<%# このページで表示されている部位を選択して検索する機能 %>
+<%= form_with(url: part_user_path(@user), method: :get, local: true) do |form| %>
+  <%= form.label :part, "部位を選択" %>
+  <%= form.select :part, options_for_select(@parts, params[:part]) %>
+  <%= form.submit "検索" %>
+<% end %>
 
 <% if @user.trains.any? %>
   <div class="space">

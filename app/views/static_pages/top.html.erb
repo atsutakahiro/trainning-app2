@@ -6,5 +6,9 @@
       <%= link_to "新規登録", signup_path, class: "btn btn-lg btn-success" %>
       <%= link_to "ログイン", login_path, class: "btn btn-lg btn-primary" %>
     <% end %>
+    <%# もしログインしている場合 %>
+    <% if logged_in? %>
+      <%= link_to "トレーニングを開始する", new_user_train_path(current_user), class: "btn btn-lg btn-success" %>
+    <% end %>
   </div>
 </div>
