@@ -67,6 +67,11 @@ before_action :correct_user, only: [:edit, :update, :show]
     else
       @trains = @user.trains
     end
+
+    if params[:part].present?
+      @part = params[:part]
+      @trains = @trains.where(part: @part)
+    end
   end
   
 

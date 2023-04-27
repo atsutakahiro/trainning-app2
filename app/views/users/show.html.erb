@@ -8,6 +8,13 @@
   <%= form.submit "検索" %>
 <% end %>
 
+<%# 部位で検索する機能 %>
+<%= form_with(url: user_path(@user), method: :get, local: true) do |form| %>
+  <%= form.label :part, "部位を選択" %>
+  <%= form.select :part, options_for_select(@parts, params[:part]) %>
+  <%= form.submit "検索" %>
+<% end %>
+
 <% if @trains.any? %>
   <div class="space">
     <div class="list-group">
