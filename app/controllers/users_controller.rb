@@ -59,11 +59,16 @@ before_action :correct_user, only: [:edit, :update, :show]
   
   def show
     @user = User.find(params[:id])
-    @date = Date.parse(params[:date]) rescue Date.today
-    @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day)
-    @exercise = @trains.first.part if @trains.present?
     @parts = Train::PARTS
+    
+    if params[:date].present?
+      @date = Date.parse(params[:date]) rescue nil
+      @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day) if @date.present?
+    else
+      @trains = @user.trains
+    end
   end
+  
 
   
 

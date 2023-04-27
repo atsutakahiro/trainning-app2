@@ -2,22 +2,16 @@
 <h2><%= @user.name %>さんのトレーニング一覧</h2>
 
 <%# 日付で検索する機能 %>
-<%= form_with(url: user_trains_path(@user), method: :get, local: true) do |form| %>
+<%= form_with(url: user_path(@user), method: :get, local: true) do |form| %>
   <%= form.label :date, "日付を選択" %>
   <%= form.date_field :date, required: true %>
   <%= form.submit "検索" %>
 <% end %>
-<%# このページで表示されている部位を選択して検索する機能 %>
-<%= form_with(url: part_user_path(@user), method: :get, local: true) do |form| %>
-  <%= form.label :part, "部位を選択" %>
-  <%= form.select :part, options_for_select(@parts, params[:part]) %>
-  <%= form.submit "検索" %>
-<% end %>
 
-<% if @user.trains.any? %>
+<% if @trains.any? %>
   <div class="space">
     <div class="list-group">
-      <% trains_by_date = @user.trains.group_by { |train| train.created_at.to_date }.sort %>
+      <% trains_by_date = @trains.group_by { |train| train.created_at.to_date }.sort %>
       <% trains_by_date.each do |date, trains| %>
         <li class="list-group-item">
           <%= link_to I18n.l(date, format: '%Y/%m/%d (%^a)'), past_trains_user_trains_path(@user, date: date) %>
@@ -34,7 +28,4 @@
 <% end %>
 
 <%= link_to '過去のトレーニングを追加する', new_user_train_path(@user), class: 'btn btn-primary'%>
-
-
-
 <%= link_to '部位別に表示する', part_user_path(current_user), class: 'btn btn-success' %>
