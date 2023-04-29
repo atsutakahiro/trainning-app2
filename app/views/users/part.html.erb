@@ -1,18 +1,17 @@
-<h2>部位別トレーニング記録</h2>
+<h2 class="mb-4">部位別トレーニング記録</h2>
 
-<%= form_tag(part_user_path(@user), method: :get) do %>
-  <div class="form-group">
-    <%= label_tag :part, '部位で検索' %>
+<%= form_tag(part_user_path(@user), method: :get, class: 'form-inline mb-4') do %>
+  <div class="form-group mr-3">
+    <%= label_tag :part, '部位で検索:', class: 'mr-2' %>
     <%= select_tag :part, options_for_select(['', '胸', '背中', '腹筋', '脚', '上腕二頭筋', '上腕三頭筋', '肩'], params[:part]), class: 'form-control' %>
   </div>
   
-  <div class="form-group">
-    <%= label_tag :exercise, '種目で検索' %>
-    <%= select_tag :exercise, options_for_select(['', 'ベンチプレス', 'デッドリフト', 'スクワット', 'プルアップ', 'チンニング', 'ショルダープレス'], params[:exercise]), class: 'form-control' %>
+  <div class="form-group mr-3">
+    <%= label_tag :exercise, '種目で検索:', class: 'mr-2' %>
+    <%= select_tag :exercise, options_for_select(['', 'ベンチプレス', 'デッドリフト', 'スクワット', 'アームカール', 'チンニング', 'ショルダープレス', 'ベントオーバーロウ'], params[:exercise]), class: 'form-control' %>
+  </div>
   <%= submit_tag "検索", class: 'btn btn-primary' %>
 <% end %>
-
-
 
 <table class="table table-bordered">
   <thead>
@@ -29,27 +28,30 @@
     </tr>
   </thead>
   <tbody>
-    <% @trains.each do |train| %>
-      <tr>
-        <td><%= l train.created_at.to_date %></td>
-        <td><%= train.exercise %></td>
-        <td><%= train.sets %></td>
-        <td><%= train.weight %></td>
-        <td><%= train.rep %></td>
-        <td><%= train.rm.to_i %></td>
-        <td><%= train.note %></td>
-        <td><%= link_to '編集', edit_user_train_path(@user, train), class: 'btn btn-success' %></td>
-        <td><%= link_to '削除', user_train_path(@user, train), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %></td>
-      </tr>
+    <%# もし検索した場合、結果を表示する。検索しなかった場合なにも表示しない %>
+    <% if @trains.present? %>
+      <% @trains.each do |train| %>
+        <tr>
+          <td><%= l train.created_at.to_date %></td>
+          <td><%= train.exercise %></td>
+          <td><%= train.sets %></td>
+          <td><%= train.weight %></td>
+          <td><%= train.rep %></td>
+          <td><%= train.rm.to_i %></td>
+          <td><%= train.note %></td>
+          <td><%= link_to '編集', edit_user_train_path(@user, train), class: 'btn btn-success' %></td>
+          <td><%= link_to '削除', user_train_path(@user, train), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %></td>
+        </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>
 
-<button type="button" class="btn btn-info" onclick="showGraph()">データをグラフ化する</button>
+<button type="button" class="btn btn-info mb-4" onclick="showGraph()">データをグラフ化する</button>
 
 <div id="chart"></div>
 
-<%= link_to '戻る', user_path(@user), class: 'btn btn-primary' %>
+<%= link_to '戻る', user_path(@user), class: 'btn btn-primary mt-4' %>
 
 <script>
   function showGraph() {
@@ -64,4 +66,3 @@
   new Chartkick.LineChart('chart', data);
 }
 </script>
-

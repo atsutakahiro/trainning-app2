@@ -27,15 +27,16 @@ before_action :correct_user, only: [:edit, :update, :show]
   def part
     @user = User.find(params[:id])
     @part = params[:part]
-  
-    if @part.present?
+    if @part.present? && params[:exercise].present?
+      @trains = @user.trains.where(exercise: params[:exercise]).order(created_at: :asc)
+    elsif @part.present?
       @trains = @user.trains.where(part: @part).order(created_at: :asc)
     elsif params[:exercise].present?
       @trains = @user.trains.where(exercise: params[:exercise]).order(created_at: :asc)
     else
-      @trains = @user.trains.order(created_at: :asc)
+      @trains = nil
     end
-  
+
     @filtered_trains = params[:exercise].present? ? @trains.where(exercise: params[:exercise]) : []
   
     params[:part] = nil
