@@ -13,7 +13,8 @@ class TrainsController < ApplicationController
     @train.created_at = params[:train][:date]
     @trains = @user.trains.all
     set_exercises
-    if @train.save
+    if @train.valid? # バリデーションチェック
+      @train.save
       flash[:success] = "部位を選択しました"
       render '_form.html.erb'
     else
@@ -21,6 +22,7 @@ class TrainsController < ApplicationController
       render 'new'
     end
   end
+  
 
   def update
     if train_params[:rep].present?
@@ -55,7 +57,7 @@ class TrainsController < ApplicationController
 
   def index
     @trains = @user.trains
-    if @trains.present?
+    if @trains.present? 
       @latest_date = @trains.last.created_at.to_date
     else
       @latest_date = Date.today
