@@ -1,7 +1,16 @@
 class TrainsController < ApplicationController
-  before_action :set_user
+  before_action :set_user, only: [:input_exercise, :index, :create, :edit, :destroy]
   before_action :set_train, only: [:edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy, :new, :show]
+
+  def input_exercise
+    @train = @user.trains.build(train_params)
+    @train.date = params[:train][:date] # 日付を@trainにセット
+    set_exercises
+    render '_form.html.erb'
+  end
+  
+
   def new
     @train = @user.trains.build
     @trains = @user.trains.all 
@@ -15,11 +24,11 @@ class TrainsController < ApplicationController
     set_exercises
     if @train.valid? # バリデーションチェック
       @train.save
-      flash[:success] = "部位を選択しました"
-      render '_form.html.erb'
+      flash[:success] = "トレーニングのデータを登録しました"
+      redirect_to user_trains_path(@user)
     else
-      flash[:error] = "部位の選択に失敗しました"
-      render 'new'
+      flash[:danger] = "登録に失敗しました。レップ数を入力してください"
+      render '_form.html.erb'
     end
   end
   
@@ -120,6 +129,6 @@ class TrainsController < ApplicationController
   end
     
   def train_params
-    params.require(:train).permit(:part, :exercise, :name, :weight, :rep, :note).merge(user_id: params[:user_id])
+    params.require(:train).permit(:part, :date, :exercise, :name, :weight, :rep, :note).merge(user_id: params[:user_id])
   end
 end

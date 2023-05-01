@@ -5,7 +5,7 @@ class Train < ApplicationRecord
   PARTS = ["胸", "肩", "上腕二頭筋", "上腕三頭筋", "腹筋", "背中", "脚"]
   # 略
 
-
+  validates :rep, presence: true
 
 
   def rm

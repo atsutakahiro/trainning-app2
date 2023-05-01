@@ -2,7 +2,7 @@
   <h1 class="text-center mb-4">トレーニングの部位選択</h1>
   <div class="row justify-content-center">
     <div class="col-md-6">
-      <%= form_with(model: @train, url: user_trains_path(@user), local: true) do |form| %>
+      <%= form_with(model: @train, url: input_exercise_user_trains_path(@user), method: :get, local: true) do |form| %>
         <div class="form-group">
           <%= form.label :part, "トレーニングの部位" %>
           <%= form.select :part, options_for_select(@parts, "胸"), class: "form-control mt-2" %>
