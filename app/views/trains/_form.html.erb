@@ -2,11 +2,11 @@
   <div class="row justify-content-center">
     <div class="col-md-6">
       <div class="card">
-        <div class="card-header bg-primary text-white text-center">
+        <div class="page-title">
           <h3>トレーニング種目新規作成</h3>
         </div>
         <div class="card-body">
-          <%= form_with(model: @train, url: user_trains_path(@user),method: :post, local: true) do |form| %>
+          <%= form_with(model: @train, url: user_trains_path(@user), method: :post, local: true) do |form| %>
             <div class="form-group">
               <%= form.label :name, "トレーニングの部位", class: "font-weight-bold" %>
               <%= form.text_field :part, readonly: true, class: "form-control", placeholder: "例：胸・腕・背中など" %>
@@ -15,9 +15,7 @@
               <%= form.label :exercise, "種目の名前", class: "font-weight-bold" %>
               <%= form.select :exercise, options_for_select(@exercises), {}, class: "form-control", prompt: "種目を選択してください" %>
             </div>
-
             <%= form.hidden_field :date, value: @train.date %>
-
             <div class="form-group">
               <%= form.label :weight, "重量（kg）", class: "font-weight-bold" %>
               <%= form.number_field :weight, class: "form-control", placeholder: "例：60" %>
@@ -30,11 +28,17 @@
               <%= form.label :note, "備考", class: "font-weight-bold" %>
               <%= form.text_field :note, class: "form-control", placeholder: "例：今日は調子がよかった" %>
             </div>
-            <%= form.submit "作成", class: "btn btn-primary btn-block" %>
-            <%= link_to "トレーニング一覧へ", user_trains_path(@user), class: "btn btn-secondary btn-block mt-2" %>
+            <div class="flex_test-box">
+              <div class="flex_test-item">
+                <%= form.submit "作成", class: "btn btn-primary btn-block" %>
+              </div>
+              <div class="flex_test-item">
+                <%= link_to "トレーニング一覧へ", user_trains_path(@user), class: "btn btn-success btn-block mt-2" %>
+              </div>
+            </div>
           <% end %>
         </div>
       </div>
     </div>
-  </div>
+  
 </div>

@@ -1,6 +1,7 @@
 <%# トレーニング一覧 %>
-<h2><%= @user.name %>さんのトレーニング一覧</h2>
-
+<div class="page-title">
+  <h2><%= @user.name %>さんのトレーニング一覧</h2>
+</div>
 <%# 日付で検索する機能 %>
 <%= form_with(url: user_path(@user), method: :get, local: true) do |form| %>
   <%= form.label :date, "日付を選択" %>
@@ -34,5 +35,5 @@
   <p>トレーニング記録がありません</p>
 <% end %>
 
-<%= link_to '過去のトレーニングを追加する', new_user_train_path(@user), class: 'btn btn-primary'%>
+<%= link_to 'トレーニングを追加する', new_user_train_path(@user), class: 'btn btn-primary'%>
 <%= link_to '部位別に表示する', part_user_path(current_user), class: 'btn btn-success' %>

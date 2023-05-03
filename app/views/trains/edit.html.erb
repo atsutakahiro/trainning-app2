@@ -1,19 +1,33 @@
-<h1>トレーニング種目編集</h1>
+<!-- app/views/trains/edit.html.erb -->
+<h1 class="page-title">トレーニング種目編集</h1>
 
-<%= form_with(model: [@user, @train], local: true) do |form| %>
-  <%= form.label :name, "トレーニングの部位" %>
-  <%= form.text_field :part, readonly: true %>
+<%= form_with(model: [@user, @train], local: true, html: { class: "train-form" }) do |form| %>
+  <div class="form-group">
+    <%= form.label :name, "トレーニングの部位", class: "form-label" %>
+    <%= form.text_field :part, readonly: true, class: "form-control" %>
+  </div>
 
-  <%= form.label :exercise, "種目の名前" %>
-  <%= form.select :exercise, options_for_select(@exercises, @train.exercise) %>
+  <div class="form-group">
+    <%= form.label :exercise, "種目の名前", class: "form-label" %>
+    <%= form.select :exercise, options_for_select(@exercises, @train.exercise), {}, class: "form-control" %>
+  </div>
 
-  <%= form.label :weight, "重量" %>
-  <%= form.number_field :weight, value: @train.weight %>
+  <div class="form-group">
+    <%= form.label :weight, "重量", class: "form-label" %>
+    <%= form.number_field :weight, value: @train.weight, class: "form-control" %>
+  </div>
 
-  <%= form.label :rep, "レップ数" %>
-  <%= form.number_field :rep, value: @train.rep %>
+  <div class="form-group">
+    <%= form.label :rep, "レップ数", class: "form-label" %>
+    <%= form.number_field :rep, value: @train.rep, class: "form-control" %>
+  </div>
 
-  <%= form.submit "更新" %>
-<% end %>
-
-<%= link_to 'トレーニング種目一覧に戻る', user_trains_path(@user) %>
+  <div class="flex_test-box">
+    <div class="flex_test-item">
+      <%= form.submit "更新", class: "btn btn-primary" %>
+    <% end %>
+    </div>
+    <div class="flex_test-item">
+      <%= link_to 'トレーニング種目一覧に戻る', user_trains_path(@user), class: "btn btn-success" %>
+    </div>
+  </div>

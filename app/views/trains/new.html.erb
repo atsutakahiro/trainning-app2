@@ -1,5 +1,7 @@
 <div class="container">
-  <h1 class="text-center mb-4">トレーニングの部位選択</h1>
+  <div class="page-title">
+    <h1 class="text-center mb-4">トレーニングの部位選択</h1>
+  </div>
   <div class="row justify-content-center">
     <div class="col-md-6">
       <%= form_with(model: @train, url: input_exercise_user_trains_path(@user), method: :get, local: true) do |form| %>

@@ -13,3 +13,25 @@
  *= require_tree .
  *= require_self
  */
+/* 追加 */
+.page-title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: #2E7D32; /* 緑色 */
+  text-transform: uppercase; /* 大文字に変換 */
+  letter-spacing: 1.5px; /* 文字間隔 */
+}
+
+
+.flex_test-box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+  margin-right: 300px;
+}
+
