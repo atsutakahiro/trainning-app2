@@ -14,6 +14,8 @@
  *= require_self
  */
 /* 追加 */
+@import "top";
+
 .page-title {
   font-size: 2.5rem;
   font-weight: bold;

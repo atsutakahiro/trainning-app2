@@ -1,5 +1,5 @@
 class TrainsController < ApplicationController
-  before_action :set_user, only: [:input_exercise, :index, :create, :edit, :destroy]
+  before_action :set_user, only: [:input_exercise, :index, :create, :edit, :destroy, :update]
   before_action :set_train, only: [:edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy, :new, :show]
 
@@ -91,6 +91,13 @@ class TrainsController < ApplicationController
   
     @trains = @user.trains.where(created_at: @date.beginning_of_day..@date.end_of_day)
   end
+# 前回のトレーニング記録を表示する
+def past_update
+  @latest_date = current_user.trains.maximum(:created_at)
+  @trains = current_user.trains.where("DATE(created_at) = DATE(?)", @latest_date).order(created_at: :desc)
+end
+
+
   
   
 

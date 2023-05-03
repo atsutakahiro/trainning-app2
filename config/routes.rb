@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       collection do
         get 'past_trains'
         get 'input_exercise'
+        get 'past_update'
       end
       member do
         get 'past_edit', action: :past_edit

@@ -1,0 +1,35 @@
+<div class="page-title">
+  <h1>前回のトレーニングは<%= @latest_date.strftime('%Y年%m月%d日(%A)').gsub(/Monday/, '月曜日').gsub(/Tuesday/, '火曜日').gsub(/Wednesday/, '水曜日').gsub(/Thursday/, '木曜日').gsub(/Friday/, '金曜日').gsub(/Saturday/, '土曜日').gsub(/Sunday/, '日曜日') %></h1>
+</div>
+
+<% @trains.group_by(&:exercise).each do |exercise, trains| %>
+  <h3><%= exercise %></h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>        
+        <th scope="col">セット数</th>
+        <th scope="col">重量(kg)</th>
+        <th scope="col">レップ</th>
+        <th scope="col">RM</th>
+        <th scope="col">備考</th>
+      </tr>
+    </thead>  
+    <tbody>
+      <% trains.each_with_index do |train, i| %>
+        <tr>
+          <th scope="row"><%= i + 1 %></th>
+          <td><%= train.weight %></td>
+          <td><%= train.rep %></td>
+          
+          <% if train.weight.present? && train.rep.present? %>
+            <% rm = train.rm %>
+            <td><%= rm.present? ? rm.round(2) : '' %></td>
+          <% else %>
+            <td></td>
+          <% end %>
+          <td><%= train.note %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

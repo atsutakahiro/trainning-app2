@@ -3,12 +3,13 @@
   <div class="sign">
     <%# もしログインしていない場合 %>
     <% if !logged_in? %>
-      <%= link_to "新規登録", signup_path, class: "btn btn-lg btn-success" %>
-      <%= link_to "ログイン", login_path, class: "btn btn-lg btn-primary" %>
+      <%= link_to "新規登録", signup_path, class: "btn btn-lg btn-success btn-extra-large" %>
+      <%= link_to "ログイン", login_path, class: "btn btn-lg btn-primary btn-extra-large" %>
     <% end %>
     <%# もしログインしている場合 %>
     <% if logged_in? %>
-      <%= link_to "トレーニングを開始する", new_user_train_path(current_user), class: "btn btn-lg btn-success" %>
+      <%= link_to "トレーニングを開始する", new_user_train_path(current_user), class: "btn btn-lg btn-danger" %>
+      <%= link_to "前回のトレーニングを確認する",  past_update_user_trains_path(current_user), class: "btn btn-lg btn-success" %>
     <% end %>
   </div>
 </div>
