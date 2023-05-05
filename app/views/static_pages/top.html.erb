@@ -8,8 +8,8 @@
     <% end %>
     <%# もしログインしている場合 %>
     <% if logged_in? %>
-      <%= link_to "トレーニングを開始する", new_user_train_path(current_user), class: "btn btn-lg btn-danger" %>
-      <%= link_to "前回のトレーニングを確認する",  past_update_user_trains_path(current_user), class: "btn btn-lg btn-success" %>
+      <%= link_to "トレーニングを開始する", new_user_train_path(current_user), class: "btn btn-lg btn-danger btn-large" %>
+      <%= link_to "前回のトレーニングを確認する",  past_update_user_trains_path(current_user), class: "btn btn-lg btn-success btn-large" %>
     <% end %>
   </div>
 </div>
