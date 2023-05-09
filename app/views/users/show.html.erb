@@ -16,6 +16,8 @@
   <%= form.submit "検索" %>
 <% end %>
 
+<a href="#bottom" class="scroll-to-bottom">一番下へ</a>
+
 <% if @trains.any? %>
   <div class="space">
     <div class="list-group">
@@ -37,3 +39,7 @@
 
 <%= link_to 'トレーニングを追加する', new_user_train_path(@user), class: 'btn btn-primary'%>
 <%= link_to '部位別に表示する', part_user_path(current_user), class: 'btn btn-success' %>
+
+
+
+<div id="bottom"></div>

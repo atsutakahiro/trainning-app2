@@ -18,13 +18,11 @@
     <tr>
       <th scope="col">日付</th>
       <th scope="col">種目</th>
-      <th scope="col">セット数</th>
       <th scope="col">重量(kg)</th>
       <th scope="col">レップ</th>
       <th scope="col">RM</th>
       <th scope="col">備考</th>
-      <th></th>
-      <th></th>
+     
     </tr>
   </thead>
   <tbody>
@@ -34,7 +32,6 @@
         <tr>
           <td><%= l train.created_at.to_date %></td>
           <td><%= train.exercise %></td>
-          <td><%= train.sets %></td>
           <td><%= train.weight %></td>
           <td><%= train.rep %></td>
           <td><%= train.rm.to_i %></td>

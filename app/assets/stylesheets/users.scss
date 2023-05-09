@@ -20,3 +20,28 @@
 .btn-user--edit {
   margin-top: 10px;
 }
+
+// showページのボタン
+/* ボタンのスタイル */
+.scroll-to-bottom {
+  display: inline-block;
+  background-color: #007bff; /* ボタンの背景色 */
+  color: #fff; /* ボタンの文字色 */
+  padding: 5px 10px; /* ボタンの内側の余白 */
+  border-radius: 4px; /* ボタンの角の丸み */
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.3s ease; /* マウスオーバー時の背景色変化のアニメーション */
+}
+
+
+
+/* ボタンのスタイル - マウスオーバー時 */
+.scroll-to-bottom:hover {
+  background-color: #0069d9; /* マウスオーバー時の背景色 */
+}
+
+/* ボタンのスタイル - アクティブ時 */
+.scroll-to-bottom:active {
+  background-color: #0053ba; /* アクティブ時の背景色 */
+}

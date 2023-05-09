@@ -1,5 +1,9 @@
 <div class="page-title">
+<% if @latest_date.present? %>
   <h1>前回のトレーニングは<%= @latest_date.strftime('%Y年%m月%d日(%A)').gsub(/Monday/, '月曜日').gsub(/Tuesday/, '火曜日').gsub(/Wednesday/, '水曜日').gsub(/Thursday/, '木曜日').gsub(/Friday/, '金曜日').gsub(/Saturday/, '土曜日').gsub(/Sunday/, '日曜日') %></h1>
+<% else %>
+  <h1>前回のトレーニングはありません</h1>
+<% end %>
 </div>
 
 <% @trains.group_by(&:exercise).each do |exercise, trains| %>

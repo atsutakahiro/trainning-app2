@@ -1,27 +1,44 @@
-<h1>トレーニング種目編集</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <h1 class="page-title text-center my-4">トレーニング種目編集</h1>
 
-<%= form_with(model: [@user, @train], local: true) do |form| %>
-  <div class="form-group">
-    <%= form.label :name, "トレーニングの部位", class: 'form-label' %>
-    <%= form.text_field :part, readonly: true, class: 'form-control' %>
+      <%= form_with(model: [@user, @train], local: true, class: "train-form", html: { class: "needs-validation", novalidate: "" }) do |form| %>
+        <div class="form-group row">
+          <%= form.label :name, "トレーニングの部位", class: "col-sm-4 col-form-label" %>
+          <div class="col-sm-8">
+            <%= form.text_field :part, readonly: true, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= form.label :weight, "重量(kg)", class: "col-sm-4 col-form-label" %>
+          <div class="col-sm-8">
+            <%= form.number_field :weight, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= form.label :rep, "レップ", class: "col-sm-4 col-form-label" %>
+          <div class="col-sm-8">
+            <%= form.number_field :rep, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <%= form.label :note, "備考", class: "col-sm-4 col-form-label" %>
+          <div class="col-sm-8">
+            <%= form.text_area :note, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group row justify-content-end">
+          <div class="col-sm-10">
+            <%= form.submit "更新", class: "btn btn-primary" %>
+            <%= link_to 'キャンセル', past_trains_user_trains_path(@user), class: 'btn btn-secondary ml-2' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
   </div>
-
-  <div class="form-group">
-    <%= form.label :weight, "重量(kg)", class: 'form-label' %>
-    <%= form.number_field :weight, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :rep, "レップ", class: 'form-label' %>
-    <%= form.number_field :rep, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-    <%= form.label :note, "備考", class: 'form-label' %>
-    <%= form.text_area :note, class: 'form-control' %>
-  </div>
-
-  <%= form.submit "更新", class: "btn btn-primary" %>
-<% end %>
-
-<%= link_to 'キャンセル', user_trains_path(@user), class: 'btn btn-secondary' %>
+</div>

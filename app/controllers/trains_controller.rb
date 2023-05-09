@@ -1,7 +1,7 @@
 class TrainsController < ApplicationController
-  before_action :set_user, only: [:input_exercise, :index, :create, :edit, :destroy, :update]
-  before_action :set_train, only: [:edit, :update, :destroy]
-  before_action :correct_user, only: [:edit, :update, :destroy, :new, :show]
+  before_action :set_user, only: [:input_exercise, :index, :create, :edit, :destroy, :update, :new, :past_edit]
+  before_action :set_train, only: [:edit, :update, :destroy, :past_edit]
+  before_action :correct_user, only: [:edit, :update, :destroy, :show, :past_edit]
 
   def input_exercise
     @train = @user.trains.build(train_params)
@@ -79,8 +79,6 @@ class TrainsController < ApplicationController
   end
 
   def past_edit
-    @user = User.find(params[:user_id])
-    @train = @user.trains.find(params[:id])
   end
   
   def past_trains
@@ -93,19 +91,34 @@ class TrainsController < ApplicationController
   end
 # 前回のトレーニング記録を表示する
 def past_update
-  @latest_date = current_user.trains.maximum(:created_at)
-  @trains = current_user.trains.where("DATE(created_at) = DATE(?)", @latest_date).order(created_at: :desc)
+  # 最新の日付を取得するが、今日の日付は除外する
+  @latest_date = current_user.trains.where("created_at < ?", Date.today.beginning_of_day).order(created_at: :desc).first.try(:created_at)
+
+  # @latest_dateが存在する場合のみ、その日付のレコードを取得する
+  if @latest_date.present?
+    @trains = current_user.trains.where("DATE(created_at) = DATE(?)", @latest_date).order(created_at: :desc)
+  else
+    @trains = []
+  end
 end
 
 
+
+
+
   
-  
+
 
   private
 
   def set_user
-    @user = User.find(params[:user_id])
+    @user = User.find_by(id: params[:user_id])
+    unless @user
+      flash[:danger] = "無効なアクセスです"
+      redirect_to root_path
+    end
   end
+  
 
   def set_train
     @train = @user.trains.find(params[:id])
@@ -113,8 +126,12 @@ end
 
   def correct_user
     @user = User.find(params[:user_id])
-    redirect_to root_path unless @user == current_user
+    unless @user == current_user
+      flash[:danger] = "権限がありません"
+      redirect_to root_path
+    end
   end
+  
   
 
   def set_exercises
