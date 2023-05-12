@@ -10,9 +10,8 @@ class User < ApplicationRecord
   validates :email, presence: true, length: { maximum: 100 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: true    
-  validates :line_user_id, uniqueness: true
-
-
+  validates :line_user_id, uniqueness: { message: 'は必須項目です。' }
+                 
   has_secure_password
   validates :password, presence: true, length: { minimum: 6 }
 
