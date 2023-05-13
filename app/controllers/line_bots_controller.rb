@@ -29,7 +29,7 @@ class LineBotController < ApplicationController
             if training_data.present?
               response_message = save_training_data(training_data, line_user_id)
             else
-              response_message = "メッセージの形式が正しくありません。正しい形式で入力してください。"
+              response_message = "メッセージの形式が正しくありません。部位, 種目名, 重量, レップ数, 備考の順番で送信してください。また、各項目を, (カンマ)と半角スペースで区切ってください。"
             end
           end
           
