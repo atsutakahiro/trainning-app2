@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-body">
+    <%= form_with(model: @exercise, url: user_exercises_path(@user), local: true) do |form| %>
+      <%= form.hidden_field :part %>
+
+      <div class="ex-title row">
+        <%= form.label :exercise, "種目の名前", class: "font-weight-bold col-sm-2 col-form-label " %>
+        <div class="col-sm-6">
+          <%= form.text_field :name, class: "form-control", required: true %>
+        </div>
+      </div>
+
+      <%= form.submit "種目を追加する", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -25,5 +25,6 @@ Rails.application.routes.draw do
       end
     end
     get 'part', on: :member
+    resources :exercises, only: [:new, :create]
   end
 end
