@@ -3,7 +3,7 @@ class TrainsController < ApplicationController
   before_action :set_train, only: [:edit, :update, :destroy, :past_edit]
   before_action :correct_user, only: [:edit, :update, :destroy, :show, :past_edit]
 
-  def input_exercise
+  def input_exercise    
     @train = @user.trains.build(train_params)
     @train.date = params[:train][:date] # 日付を@trainにセット
     set_exercises
